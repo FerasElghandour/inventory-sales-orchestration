@@ -60,3 +60,7 @@ See [DATA.md](DATA.md) for input contracts and [VALIDATION.md](VALIDATION.md) fo
 The core does not implement payment processing, supplier replenishment, delivery guarantees, or a live customer service. Agent-generated plans must still pass the deterministic inventory transaction before becoming orders.
 
 No client deployment, commercial outcome, or new live-provider performance is inferred from the component tests.
+
+## Reuse
+
+The original contributions listed in [LICENSING.md](LICENSING.md) are available under [MIT](LICENSE). This scoped grant preserves upstream notices and separate dataset, simulator, notebook and checkpoint terms.
