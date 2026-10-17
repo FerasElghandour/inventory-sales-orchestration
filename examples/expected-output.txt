@@ -1,0 +1,2 @@
+{'total_cents': 375, 'items': {'demo': 3}}
+{'stock_remaining': 7}

@@ -1,18 +1,30 @@
 # Inventory and Sales Orchestration
 
-**Feras Elghandour** · Technical case study
-
 Ensure a sales workflow cannot promise stock twice or leave a partially written order after an error.
 
 ## Implementation
 
 A standalone SQLite reservation core with integer-cent quotes, quantity/date validation, atomic inventory updates, unique order identifiers, and rollback on failure.
 
-```mermaid
-flowchart LR
-    A[Validated inputs] --> B[Core implementation]
-    B --> C[Behavior and error checks]
-    C --> D[Inspectable outcome]
+![Implementation mechanism: Validate quantity and integer cents → Begin immediate SQLite transaction → Create quote and order records → Conditionally decrement available inventory → Commit all steps or roll back](assets/mechanism.svg)
+
+## Try a small example
+
+A small offline fixture exercises the public implementation. It demonstrates the behavior shown below; it does not replace the historical dataset, benchmark or production validation.
+
+After the local setup below, run from the repository root:
+
+```sh
+python examples/quickstart.py
+```
+
+The [example source](examples/quickstart.py), [captured output](examples/expected-output.txt) and [execution record](examples/environment.json) keep this demonstration inspectable. Floating-point values may vary with library versions.
+
+Observed output from this run:
+
+```text
+{'total_cents': 375, 'items': {'demo': 3}}
+{'stock_remaining': 7}
 ```
 
 ## Evidence and results
@@ -32,7 +44,7 @@ python -m pip install -r requirements.txt
 python smoke_test.py
 ```
 
-See [DATA.md](DATA.md) for input contracts and [VALIDATION.md](VALIDATION.md) for the verification scope. The modules expose small APIs that can be integrated into a larger workflow.
+See [DATA.md](DATA.md) for input contracts and [VALIDATION.md](VALIDATION.md) for the verification scope. 
 
 ## Practical relevance and limitations
 
